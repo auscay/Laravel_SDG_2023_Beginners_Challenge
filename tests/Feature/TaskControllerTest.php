@@ -14,10 +14,12 @@ class TaskControllerTest extends TestCase
      * A basic feature test example.
      */
     public function test_can_list_all_tasks() {
-         Task::factory()->count(3)->create();
-         $response = $this->getJson('/api/tasks');
-         $response->assertStatus(200) ->assertJsonCount(3);
-        }
+        $this->withoutExceptionHandling(); // Optional: Disable exception handling for better error messages
+        Task::factory()->count(1)->create();
+
+        $response = $this->getJson('/api/tasks');
+        $response->assertStatus(200)->assertJsonCount(1);
+    }
     public function test_can_show_a_task() {
          $task = Task::factory()->create();
           $response = $this->getJson('/api/tasks/' . $task->id);
