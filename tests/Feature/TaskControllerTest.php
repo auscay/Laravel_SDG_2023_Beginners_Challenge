@@ -6,6 +6,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use App\Models\Task;
 use Tests\TestCase;
+use Carbon\Carbon;
 
 class TaskControllerTest extends TestCase
 {
@@ -29,7 +30,8 @@ class TaskControllerTest extends TestCase
                 'id' => $task->id,
                 'title' => $task->title,
                 'description' => $task->description,
-                'completed' => $task->completed
+                'dueDate' => $task->dueDate,
+                'status' => $task->status
                  ]
             ]);
     }
@@ -37,15 +39,20 @@ class TaskControllerTest extends TestCase
         $data = [
             'title' => 'Test Task',
              'description' => 'This is a test task',
-             'completed' => false
+             'status' => 'pending',
+             'dueDate' => '23-09-65'
         ];
         $response = $this->postJson('/api/tasks', $data);
          $response->assertStatus(201)
          ->assertJson([
             'data' => [
+                'id' => $response['data']['id'],
                 'title' => $data['title'],
                 'description' => $data['description'],
-                'completed' => $data['completed']
+                'status' => $data['status'],
+                'dueDate' => $data['dueDate'],
+                'created_at' => $response['data']['created_at'],
+                'updated_at' => $response['data']['updated_at'],
             ]
         ]);
     }
@@ -54,7 +61,8 @@ class TaskControllerTest extends TestCase
         $data = [
              'title' => 'Updated Task Title',
               'description' => 'This task has been updated',
-              'completed' => true
+              'status' => "completed",
+              'dueDate' => '23-09-2024'
         ];
         $response = $this->putJson('/api/tasks/' . $task->id, $data);
          $response->assertStatus(200)
@@ -63,7 +71,11 @@ class TaskControllerTest extends TestCase
                 'id' => $task->id,
                  'title' => $data['title'],
                  'description' => $data['description'],
-                'completed' => $data['completed']
+                'status' => $data['status'],
+                'dueDate' => $data['dueDate'],
+                'created_at' => $response['data']['created_at'],
+                'updated_at' => $response['data']['updated_at'],
+
             ]
         ]);
     }

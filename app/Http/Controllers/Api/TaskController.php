@@ -25,7 +25,8 @@ class TaskController extends Controller {
         [
             'title' => 'required|max:255',
             'description' => 'required|max:255',
-            'completed' => 'required|boolean'
+            'dueDate' => 'required',
+            'status' => 'required'
         ]);
         if ($validator->fails()) {
             return response()->json(['errors' => $validator->errors()], 400);
@@ -42,14 +43,16 @@ class TaskController extends Controller {
          [
             'title' => 'required|max:255',
             'description' => 'required|max:255',
-            'completed' => 'required|boolean'
+            'status' => 'required',
+            'dueDate' => 'required'
          ]);
         if ($validator->fails()) {
              return response()->json(['errors' => $validator->errors()], 400);
         }
         $task->title = $request->title;
         $task->description = $request->description;
-        $task->completed = $request->completed;
+        $task->status = $request->status;
+        $task->dueDate = $request->dueDate;
         $task->save();
         return new TaskResource($task);
     }

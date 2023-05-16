@@ -5,18 +5,11 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
-use App\Models\Task;
-use Faker\Generator as Faker;
+
 // use Illuminate\Database\Eloquent\Factories\Factory;
 
 class TaskFactory extends Factory
 {
-    /**
-     * The name of the factory's corresponding model.
-     *
-     * @var string
-     */
-    protected $model = Task::class;
 
     /**
      * Define the model's default state.
@@ -26,9 +19,10 @@ class TaskFactory extends Factory
     public function definition(): array
     {
         return [
-            'title' => $this->faker->sentence,
-            'description' => $this->faker->paragraph,
-            'completed' => false,
+            'title' => fake()->sentence(),
+            'description' => fake()->paragraph(),
+            'dueDate' => fake()->date(),
+            'status' => fake()->randomElement(['pending', 'in_progress', 'completed']),
         ];
     }
 }
