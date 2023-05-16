@@ -43,6 +43,7 @@ Your work is to perform the following:
 ## Tests
      ```shell
     Run php artisan test
+  A successful test should look like this in your Vs code terminal
  ![A successful test should look like this in your Vs code terminal](https://github.com/InventorsDev/Laravel_SDG_2023_Beginners_Challenge/assets/39954854/ba98e736-00ae-47c9-9a1d-db5ccbce7abf)
 
 
