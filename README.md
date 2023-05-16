@@ -45,7 +45,9 @@ Your work is to perform the following:
     Run php artisan test
 
     A successful test should look like this in your Vs code terminal
-![A successful test should look like this in your Vs code terminal](public\Screenshottest.png)
+
+ ![A successful test should look like this in your Vs code terminal](public\Screenshottest.png)
+
 
 ## Notes
      Test Cases
